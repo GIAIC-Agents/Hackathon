@@ -1,0 +1,39 @@
+/**
+ * Any CSS included here will be global. The classic template
+ * bundles Infima by default. Infima is a CSS framework designed to
+ * work well for content-centric websites.
+ */
+
+/* You can override the default Infima variables here. */
+:root {
+  --ifm-color-primary: #2a7ce6; /* Primary blue for AI/tech theme */
+  --ifm-color-primary-dark: #1e6bd4;
+  --ifm-color-primary-darker: #1a62c4;
+  --ifm-color-primary-darkest: #134ba1;
+  --ifm-color-primary-light: #3c88e9;
+  --ifm-color-primary-lighter: #5a9ced;
+  --ifm-color-primary-lightest: #7ab0f0;
+  --ifm-color-secondary: #4a90e2; /* Secondary blue */
+  --ifm-color-accent: #00d4ff; /* Accent teal/cyan for highlights */
+  --ifm-color-metallic: #a0b1c5; /* Metallic gray for robot theme */
+  --ifm-color-silver: #c0cbd6; /* Silver for metallic accents */
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(42, 124, 230, 0.15); /* Match primary color */
+  --ifm-navbar-shadow: 0 1px 2px 0 rgba(42, 124, 230, 0.1);
+}
+
+/* For readability concerns, you should choose a lighter palette in dark mode. */
+[data-theme='dark'] {
+  --ifm-color-primary: #4da2ff; /* Lighter blue for dark mode */
+  --ifm-color-primary-dark: #3a8de0;
+  --ifm-color-primary-darker: #2d7bc7;
+  --ifm-color-primary-darkest: #225f9c;
+  --ifm-color-primary-light: #6cb6ff;
+  --ifm-color-primary-lighter: #8dc5ff;
+  --ifm-color-primary-lightest: #addbff;
+  --ifm-color-secondary: #5aa0ff; /* Secondary blue for dark mode */
+  --ifm-color-accent: #00eaff; /* Bright accent for dark mode */
+  --ifm-color-metallic: #7a8ca3; /* Darker metallic for contrast */
+  --ifm-color-silver: #94a3b8; /* Silver in dark mode */
+  --docusaurus-highlighted-code-line-bg: rgba(77, 162, 255, 0.2); /* Match primary color in dark mode */
+}
