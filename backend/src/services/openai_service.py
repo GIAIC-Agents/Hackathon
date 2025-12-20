@@ -1,4 +1,4 @@
-import openai
+from openai import OpenAI
 import logging
 from src.core.config import settings
 
@@ -8,7 +8,7 @@ logger = logging.getLogger(__name__)
 
 class OpenAIService:
     def __init__(self):
-        openai.api_key = settings.OPENAI_API_KEY
+        self.openai_client = OpenAI(api_key=settings.OPENAI_API_KEY)
         self.model = settings.OPENAI_MODEL
 
     async def generate_response(self, query: str, context: str) -> str:
@@ -32,7 +32,7 @@ class OpenAIService:
             Answer:
             """
             
-            response = openai.ChatCompletion.create(
+            response = self.openai_client.chat.completions.create(
                 model=self.model,
                 messages=[
                     {
@@ -48,7 +48,7 @@ class OpenAIService:
                 temperature=0.3
             )
             
-            answer = response.choices[0].message['content'].strip()
+            answer = response.choices[0].message.content.strip()
             logger.info("Response generated successfully")
             
             return answer

@@ -16,19 +16,23 @@ class Settings(BaseSettings):
     APP_VERSION: str = "1.0.0"
     
     # Qdrant settings
-    QDRANT_URL: str = os.getenv("QDRANT_URL", "https://your-cluster-url.qdrant.io:6333")
-    QDRANT_API_KEY: str = os.getenv("QDRANT_API_KEY", "")
-    QDRANT_COLLECTION_NAME: str = os.getenv("QDRANT_COLLECTION_NAME", "book_embeddings")
+    QDRANT_URL: str = "https://b3d322b2-6c79-4854-b2e8-b7941ec42f65.us-east4-0.gcp.cloud.qdrant.io:6333"
+    QDRANT_API_KEY: str = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2Nlc3MiOiJtIn0.ukKXDAD040ermRRcD-BFIdb_mI8kHmWJQnF5JfMri8Q"
+    QDRANT_COLLECTION_NAME: str = "book_embeddings"
     
     # Neon Postgres settings
-    NEON_DATABASE_URL: str = os.getenv("NEON_DATABASE_URL", "")
+    NEON_DATABASE_URL: str = ""
     
     # OpenAI settings
-    OPENAI_API_KEY: str = os.getenv("OPENAI_API_KEY", "")
-    OPENAI_MODEL: str = os.getenv("OPENAI_MODEL", "gpt-3.5-turbo")
+    OPENAI_API_KEY: str = ""
+    OPENAI_MODEL: str = "gpt-3.5-turbo"
+    
+    # Gemini settings
+    GEMINI_API_KEY: str = ""
+    GEMINI_MODEL: str = "gemini-pro"
     
     # Other settings
-    CORS_ORIGINS: str = os.getenv("CORS_ORIGINS", "*")
+    CORS_ORIGINS: str = "*"
 
 
 settings = Settings()

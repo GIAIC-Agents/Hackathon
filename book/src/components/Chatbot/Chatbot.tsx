@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import './Chatbot.module.css';
+import './Chatbot.css';
 
 interface Message {
   id: string;
@@ -66,7 +66,7 @@ const Chatbot: React.FC = () => {
 
     try {
       // Call the backend API to get bot response
-      const response = await fetch('/api/query', {
+      const response = await fetch('http://localhost:8000/api/rag/query', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -125,15 +125,15 @@ const Chatbot: React.FC = () => {
         <div className="chatbot-container">
           <div className="chatbot-header">
             <h3>Book Assistant</h3>
-            <button 
-              className="chatbot-close-button" 
+            <button
+              className="chatbot-close-button"
               onClick={toggleChat}
               aria-label="Close chat"
             >
               ×
             </button>
           </div>
-          
+
           <div className="chatbot-messages">
             {messages.length === 0 ? (
               <div className="chatbot-welcome-message">
@@ -141,8 +141,8 @@ const Chatbot: React.FC = () => {
               </div>
             ) : (
               messages.map((message) => (
-                <div 
-                  key={message.id} 
+                <div
+                  key={message.id}
                   className={`chatbot-message ${message.sender}-message`}
                 >
                   <div className="message-content">{message.content}</div>
@@ -165,7 +165,7 @@ const Chatbot: React.FC = () => {
             )}
             <div ref={messagesEndRef} />
           </div>
-          
+
           <div className="chatbot-input-area">
             <input
               type="text"
@@ -176,8 +176,8 @@ const Chatbot: React.FC = () => {
               disabled={isLoading}
               aria-label="Type your question"
             />
-            <button 
-              onClick={handleSendMessage} 
+            <button
+              onClick={handleSendMessage}
               disabled={inputValue.trim() === '' || isLoading}
               aria-label="Send message"
             >

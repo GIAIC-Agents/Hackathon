@@ -5,7 +5,7 @@ from qdrant_client.http import models
 from sqlalchemy import create_engine, text
 from sqlalchemy.orm import sessionmaker
 from src.core.config import settings
-import openai
+from src.services.gemini_service import GeminiService
 
 # Set up logging
 logging.basicConfig(level=logging.INFO)
@@ -20,6 +20,9 @@ class Retriever:
             prefer_grpc=False
         )
         self.collection_name = settings.QDRANT_COLLECTION_NAME
+        
+        # Initialize Gemini service for embeddings
+        self.gemini_service = GeminiService()
         
         # Initialize Neon Postgres connection
         if settings.NEON_DATABASE_URL:
@@ -80,17 +83,10 @@ class Retriever:
 
     async def _get_embedding(self, text: str) -> List[float]:
         """
-        Generate embedding for the given text using OpenAI
+        Generate embedding for the given text using Gemini
         """
         try:
-            openai.api_key = settings.OPENAI_API_KEY
-            
-            response = openai.Embedding.create(
-                input=text,
-                model="text-embedding-ada-002"
-            )
-            
-            embedding = response['data'][0]['embedding']
+            embedding = await self.gemini_service.get_embedding(text)
             logger.info(f"Generated embedding with {len(embedding)} dimensions")
             return embedding
         except Exception as e:

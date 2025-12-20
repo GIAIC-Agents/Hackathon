@@ -2,7 +2,7 @@ from typing import List, Optional
 from pydantic import BaseModel
 import logging
 from src.services.retriever import Retriever
-from src.services.openai_service import OpenAIService
+from src.services.gemini_service import GeminiService
 
 # Set up logging
 logging.basicConfig(level=logging.INFO)
@@ -15,7 +15,7 @@ class QueryResponse(BaseModel):
 class RAGPipeline:
     def __init__(self):
         self.retriever = Retriever()
-        self.openai_service = OpenAIService()
+        self.ai_service = GeminiService()
 
     async def process_query(self, query: str) -> QueryResponse:
         """
@@ -34,9 +34,9 @@ class RAGPipeline:
             context = self._build_context(relevant_docs)
             logger.info(f"Built context with {len(context)} characters")
             
-            # Step 3: Generate response using OpenAI
-            logger.info("Step 3: Generating response using OpenAI")
-            answer = await self.openai_service.generate_response(query, context)
+            # Step 3: Generate response using Gemini
+            logger.info("Step 3: Generating response using Gemini")
+            answer = await self.ai_service.generate_response(query, context)
             logger.info("Response generated successfully")
             
             # Extract sources for attribution
@@ -65,9 +65,9 @@ class RAGPipeline:
             context = self._build_context(relevant_docs, text_context)
             logger.info(f"Built context with {len(context)} characters")
             
-            # Step 3: Generate response using OpenAI
-            logger.info("Step 3: Generating response using OpenAI")
-            answer = await self.openai_service.generate_response(query, context)
+            # Step 3: Generate response using Gemini
+            logger.info("Step 3: Generating response using Gemini")
+            answer = await self.ai_service.generate_response(query, context)
             logger.info("Response generated successfully")
             
             # Extract sources for attribution
