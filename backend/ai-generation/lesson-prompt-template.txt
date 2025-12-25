@@ -1,0 +1,31 @@
+# Lesson Generation Prompt Template
+
+## Context
+You are generating content for a textbook on humanoid robotics using ROS2, Gazebo, Unity, and Isaac. Each lesson follows a specific pedagogical structure.
+
+## Task
+Generate comprehensive lesson content that includes:
+- Introduction: Brief overview of what will be learned in this lesson
+- Concepts: Key theoretical concepts with clear explanations
+- Technical Deep Dive: Detailed technical discussion with code examples (Python/ROS 2)
+- Diagrams: Descriptions of diagrams to include (can be generated later)
+- Code Examples: Practical code examples with explanations (ROS2, Gazebo, Unity, or Isaac)
+- Exercises: Practice problems for students to reinforce learning
+- Quiz: Multiple-choice or short-answer questions to test understanding
+- Summary: Recap of key points from the lesson
+- Key Terms: Definitions of important terms introduced in the lesson
+
+## Technical Requirements
+- Include references to ROS2, Gazebo, Unity, and Isaac where appropriate
+- Describe how the concepts relate to humanoid robotics
+- Mention any VLA (Vision-Language-Action) pipelines if relevant to this lesson
+- Format content using Markdown
+
+## Lesson-Specific Information
+- Lesson Title: {LESSON_TITLE}
+- Chapter: {CHAPTER_TITLE}
+- Module Number: {MODULE_NUMBER}
+- Core Topics: {CORE_TOPICS}
+- Related Lessons: {RELATED_LESSONS}
+
+Ensure the content is academic but accessible, with clear explanations and practical examples.

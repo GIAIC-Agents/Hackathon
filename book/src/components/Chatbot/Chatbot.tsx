@@ -65,8 +65,10 @@ const Chatbot: React.FC = () => {
     setIsLoading(true);
 
     try {
+      const apiBaseUrl = process.env.DOCUSAURUS_API_BASE_URL || 'http://localhost:8000';
+
       // Call the backend API to get bot response
-      const response = await fetch('http://localhost:8000/api/rag/query', {
+      const response = await fetch(`${apiBaseUrl}/api/rag/query`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -147,7 +149,7 @@ const Chatbot: React.FC = () => {
                 >
                   <div className="message-content">{message.content}</div>
                   <div className="message-timestamp">
-                    {message.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                    {new Date(message.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                   </div>
                 </div>
               ))

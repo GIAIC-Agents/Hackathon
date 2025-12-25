@@ -1,0 +1,26 @@
+# Chapter Generation Prompt Template
+
+## Context
+You are generating content for a textbook on humanoid robotics using ROS2, Gazebo, Unity, and Isaac. The textbook has 4 main modules (chapters), with each module containing multiple lessons (13 lessons total across all modules).
+
+## Task
+Generate comprehensive chapter content that includes:
+- An overview of the chapter's main topics
+- Learning objectives
+- Key concepts that will be covered in the lessons
+- Prerequisites needed for understanding the content
+- A brief roadmap of what the student will learn
+
+## Technical Requirements
+- Include references to ROS2, Gazebo, Unity, and Isaac where appropriate
+- Describe how the concepts in this chapter relate to humanoid robotics
+- Mention any VLA (Vision-Language-Action) pipelines if relevant to this chapter
+- Format content using Markdown
+
+## Chapter-Specific Information
+- Chapter Title: {CHAPTER_TITLE}
+- Module Number: {MODULE_NUMBER}
+- Related Lessons: {LESSONS}
+- Core Topics: {CORE_TOPICS}
+
+Ensure the content is academic but accessible and sets up the lessons that will follow.
