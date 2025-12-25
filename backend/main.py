@@ -101,6 +101,12 @@ async def health_check():
     return HealthResponse(status="healthy", version="1.0.0")
 
 
+@app.options("/api/rag/query")
+async def options_query():
+    """Handle CORS preflight requests."""
+    return {"message": "OK"}
+
+
 @app.post("/api/rag/query", response_model=QueryResponse)
 async def query_endpoint(request: QueryRequest):
     """
@@ -108,7 +114,10 @@ async def query_endpoint(request: QueryRequest):
     """
     global config, qdrant_client, groq_client
     
+    logger.info(f"Received query request: {request.query}")
+    
     if not config or not qdrant_client or not groq_client:
+        logger.error("Chatbot service not initialized")
         raise HTTPException(
             status_code=503,
             detail="Chatbot service not initialized. Please check server logs."

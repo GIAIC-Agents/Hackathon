@@ -52,10 +52,13 @@ const Chatbot: React.FC = () => {
   const handleSendMessage = async () => {
     if (inputValue.trim() === '' || isLoading) return;
 
+    // Store the query before clearing input
+    const queryText = inputValue.trim();
+
     // Add user message
     const userMessage: Message = {
       id: Date.now().toString(),
-      content: inputValue,
+      content: queryText,
       sender: 'user',
       timestamp: new Date(),
     };
@@ -65,22 +68,38 @@ const Chatbot: React.FC = () => {
     setIsLoading(true);
 
     try {
-      const apiBaseUrl = process.env.DOCUSAURUS_API_BASE_URL || 'http://localhost:8000';
+      // Use localhost:8000 for local development - in production, update this URL
+      const apiBaseUrl = 'http://localhost:8000';
+      const apiUrl = `${apiBaseUrl}/api/rag/query`;
+
+      console.log('Sending query to:', apiUrl);
+      console.log('Query text:', queryText);
 
       // Call the backend API to get bot response
-      const response = await fetch(`${apiBaseUrl}/api/rag/query`, {
+      const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ query: inputValue }),
+        body: JSON.stringify({ query: queryText }),
       });
 
+      console.log('Response status:', response.status);
+      console.log('Response ok:', response.ok);
+
       if (!response.ok) {
-        throw new Error(`API request failed with status ${response.status}`);
+        const errorText = await response.text();
+        console.error('API error response:', errorText);
+        throw new Error(`API request failed with status ${response.status}: ${errorText}`);
       }
 
       const data = await response.json();
+      console.log('Response data:', data);
+
+      if (!data || !data.response) {
+        throw new Error('Invalid response format from API');
+      }
+
       const botMessage: Message = {
         id: Date.now().toString(),
         content: data.response,
@@ -93,7 +112,9 @@ const Chatbot: React.FC = () => {
       console.error('Error getting bot response:', error);
       const errorMessage: Message = {
         id: Date.now().toString(),
-        content: 'Sorry, I encountered an error. Please try again.',
+        content: error instanceof Error 
+          ? `Sorry, I encountered an error: ${error.message}. Please check the console for details.`
+          : 'Sorry, I encountered an error. Please try again.',
         sender: 'bot',
         timestamp: new Date(),
       };
